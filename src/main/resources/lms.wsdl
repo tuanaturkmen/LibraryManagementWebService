@@ -16,18 +16,37 @@
     <wsdl:message name="GetStudentResponse">
         <wsdl:part name="parameters" element="tns:GetStudentResponse"/>
     </wsdl:message>
+    <wsdl:message name="GetAllBooksRequest">
+        <wsdl:part name="parameters" element="tns:GetAllBooksRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetAllBooksResponse">
+        <wsdl:part name="parameters" element="tns:GetAllBooksResponse"/>
+    </wsdl:message>
 
-    <wsdl:portType name="studentPortType">
+    <wsdl:portType name="lmsPortType">
         <wsdl:operation name="GetStudentWithId">
             <wsdl:input message="tns:GetStudentRequest"/>
             <wsdl:output message="tns:GetStudentResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="GetAllBooks">
+            <wsdl:input message="tns:GetAllBooksRequest"/>
+            <wsdl:output message="tns:GetAllBooksResponse"/>
+        </wsdl:operation>
     </wsdl:portType>
 
-    <wsdl:binding name="librarySOAP" type="tns:studentPortType">
+    <wsdl:binding name="librarySOAP" type="tns:lmsPortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="GetStudentWithId">
             <soap:operation soapAction="http://lms.com/GetStudentWithId"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllBooks">
+            <soap:operation soapAction="http://lms.com/GetAllBooks"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
