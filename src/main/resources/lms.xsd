@@ -1,0 +1,28 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://lms.com" targetNamespace="http://lms.com" elementFormDefault="qualified">
+
+    <xs:element name="GetStudentRequest" type="tns:GetStudentRequestType" />
+    <xs:element name="GetStudentResponse" type="tns:GetStudentResponseType" />
+
+    <xs:complexType name="GetStudentRequestType">
+        <xs:sequence>
+            <xs:element name="studentId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType> 
+
+    <xs:complexType name="GetStudentResponseType">
+        <xs:sequence>
+            <xs:element name="student" type="tns:student" maxOccurs="1" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="student">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="studentId" type="xs:string"/>
+            <xs:element name="department" type="xs:string"/>
+            <xs:element name="year" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
