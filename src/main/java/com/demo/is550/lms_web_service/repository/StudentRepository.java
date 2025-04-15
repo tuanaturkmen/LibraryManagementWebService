@@ -36,7 +36,7 @@ public class StudentRepository {
 	}
 
 	public Student findStudent(String studentId) {
-		Assert.notNull(studentId, "Student id  must not be null");
+		Assert.notNull(studentId, "Student id must not be null");
 		return students.get(studentId);
 	}
 }

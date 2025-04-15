@@ -14,15 +14,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GetAllBooksRequestType complex type.
+ * <p>Java class for UpdateBookResponseType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GetAllBooksRequestType"&gt;
+ * &lt;complexType name="UpdateBookResponseType"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="success" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,8 +33,27 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GetAllBooksRequestType")
-public class GetAllBooksRequestType {
+@XmlType(name = "UpdateBookResponseType", propOrder = {
+    "success"
+})
+public class UpdateBookResponseType {
 
+    protected boolean success;
+
+    /**
+     * Gets the value of the success property.
+     * 
+     */
+    public boolean isSuccess() {
+        return success;
+    }
+
+    /**
+     * Sets the value of the success property.
+     * 
+     */
+    public void setSuccess(boolean value) {
+        this.success = value;
+    }
 
 }

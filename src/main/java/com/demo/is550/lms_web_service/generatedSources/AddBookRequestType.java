@@ -10,19 +10,21 @@ package com.demo.is550.lms_web_service.generatedSources;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for GetAllBooksRequestType complex type.
+ * <p>Java class for AddBookRequestType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="GetAllBooksRequestType"&gt;
+ * &lt;complexType name="AddBookRequestType"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="book" type="{http://lms.com}book"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,8 +34,36 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GetAllBooksRequestType")
-public class GetAllBooksRequestType {
+@XmlType(name = "AddBookRequestType", propOrder = {
+    "book"
+})
+public class AddBookRequestType {
 
+    @XmlElement(required = true)
+    protected Book book;
+
+    /**
+     * Gets the value of the book property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Book }
+     *     
+     */
+    public Book getBook() {
+        return book;
+    }
+
+    /**
+     * Sets the value of the book property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Book }
+     *     
+     */
+    public void setBook(Book value) {
+        this.book = value;
+    }
 
 }

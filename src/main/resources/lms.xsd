@@ -3,8 +3,17 @@
 
     <xs:element name="GetStudentRequest" type="tns:GetStudentRequestType"/>
     <xs:element name="GetStudentResponse" type="tns:GetStudentResponseType"/>
+    
     <xs:element name="GetAllBooksRequest" type="tns:GetAllBooksRequestType"/>
     <xs:element name="GetAllBooksResponse" type="tns:GetAllBooksResponseType"/>
+    <xs:element name="GetBookByIdRequest" type="tns:GetBookByIdRequestType"/>
+	<xs:element name="GetBookByIdResponse" type="tns:GetBookByIdResponseType"/>
+	<xs:element name="DeleteBookByIdRequest" type="tns:DeleteBookByIdRequestType"/>
+	<xs:element name="DeleteBookByIdResponse" type="tns:DeleteBookByIdResponseType"/>
+    <xs:element name="AddBookRequest" type="tns:AddBookRequestType"/>
+	<xs:element name="AddBookResponse" type="tns:AddBookResponseType"/>
+	<xs:element name="UpdateBookRequest" type="tns:UpdateBookRequestType"/>
+	<xs:element name="UpdateBookResponse" type="tns:UpdateBookResponseType"/>
 
     <xs:complexType name="GetStudentRequestType">
         <xs:sequence>
@@ -27,7 +36,56 @@
             <xs:element name="book" type="tns:book" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="GetBookByIdRequestType">
+	    <xs:sequence>
+	        <xs:element name="id" type="xs:int"/>
+	    </xs:sequence>
+	</xs:complexType>
 
+	<xs:complexType name="GetBookByIdResponseType">
+	    <xs:sequence>
+        	<xs:element name="book" type="tns:book" minOccurs="0"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+    <xs:complexType name="DeleteBookByIdRequestType">
+    	<xs:sequence>
+	        <xs:element name="id" type="xs:int"/>
+	    </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DeleteBookByIdResponseType">
+	    <xs:sequence>
+        	<xs:element name="success" type="xs:boolean"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+    <xs:complexType name="AddBookRequestType">
+    	<xs:sequence>
+	        <xs:element name="book" type="tns:book"/>
+	    </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AddBookResponseType">
+	    <xs:sequence>
+	        <xs:element name="success" type="xs:boolean"/>
+	        <xs:element name="bookId" type="xs:int"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UpdateBookRequestType">
+	    <xs:sequence>
+	        <xs:element name="book" type="tns:book"/>
+	    </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="UpdateBookResponseType">
+	    <xs:sequence>
+	        <xs:element name="success" type="xs:boolean"/>
+	    </xs:sequence>
+	</xs:complexType>
+	
     <xs:complexType name="student">
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
@@ -40,6 +98,7 @@
 
     <xs:complexType name="book">
         <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
             <xs:element name="title" type="xs:string"/>
             <xs:element name="author" type="xs:string"/>
             <xs:element name="publicationYear" type="xs:date"/>
