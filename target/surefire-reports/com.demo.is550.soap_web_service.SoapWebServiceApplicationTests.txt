@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.demo.is550.soap_web_service.SoapWebServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.300 s -- in com.demo.is550.soap_web_service.SoapWebServiceApplicationTests

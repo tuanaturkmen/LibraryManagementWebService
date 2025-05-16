@@ -1,4 +1,3 @@
-
 package com.demo.is550.soap_web_service_consumer.client.gen;
 
 import javax.xml.namespace.QName;
