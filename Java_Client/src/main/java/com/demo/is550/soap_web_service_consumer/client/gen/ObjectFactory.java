@@ -70,13 +70,6 @@ public class ObjectFactory {
         return new GetAllBooksResponseType();
     }
 
-    /**
-     * Create an instance of {@link SaveBookRequestType }
-     * 
-     */
-    public SaveBookRequestType createSaveBookRequestType() {
-        return new SaveBookRequestType();
-    }
      /* Create an instance of {@link GetBookByIdRequestType }
      * 
      */
@@ -158,19 +151,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://lms.com", name = "GetAllBooksResponse")
     public JAXBElement<GetAllBooksResponseType> createGetAllBooksResponse(GetAllBooksResponseType value) {
         return new JAXBElement<GetAllBooksResponseType>(_GetAllBooksResponse_QNAME, GetAllBooksResponseType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SaveBookRequestType }{@code >}
-     *  @XmlElementDecl(namespace = "http://lms.com", name = "SaveBookRequest")
-     * 
-     * * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link SaveBookRequestType }{@code >}
-     */
-    public JAXBElement<SaveBookRequestType> createSaveBookRequest(SaveBookRequestType value) {
-        return new JAXBElement<SaveBookRequestType>(_SaveBookRequest_QNAME, SaveBookRequestType.class, null, value);
     }
 
       /* Create an instance of {@link JAXBElement }{@code <}{@link GetBookByIdRequestType }{@code >}
