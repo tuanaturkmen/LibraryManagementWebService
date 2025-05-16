@@ -6,7 +6,6 @@
     
     <xs:element name="GetAllBooksRequest" type="tns:GetAllBooksRequestType"/>
     <xs:element name="GetAllBooksResponse" type="tns:GetAllBooksResponseType"/>
-    <xs:element name="SaveBookRequest" type="tns:SaveBookRequestType" />
     <xs:element name="GetBookByIdRequest" type="tns:GetBookByIdRequestType"/>
 	<xs:element name="GetBookByIdResponse" type="tns:GetBookByIdResponseType"/>
 	<xs:element name="DeleteBookByIdRequest" type="tns:DeleteBookByIdRequestType"/>
@@ -35,11 +34,6 @@
     <xs:complexType name="GetAllBooksResponseType">
         <xs:sequence>
             <xs:element name="book" type="tns:book" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="SaveBookRequestType">
-        <xs:sequence>
-            <xs:element name="newBook" type="tns:book"/>
         </xs:sequence>
     </xs:complexType>
     
