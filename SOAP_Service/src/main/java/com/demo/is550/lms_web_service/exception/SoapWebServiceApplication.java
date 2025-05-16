@@ -1,4 +1,4 @@
-package com.demo.is550.lms_web_service;
+package com.demo.is550.lms_web_service.exception;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

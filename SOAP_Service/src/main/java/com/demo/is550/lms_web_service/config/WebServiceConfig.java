@@ -26,7 +26,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean(name = "lms")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema lmsSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-		wsdl11Definition.setPortTypeName("lmsPort");
+		wsdl11Definition.setPortTypeName("lmsPortType");
 		wsdl11Definition.setLocationUri("/ws");
 		wsdl11Definition.setTargetNamespace("http://lms.com");
 		wsdl11Definition.setSchema(lmsSchema);

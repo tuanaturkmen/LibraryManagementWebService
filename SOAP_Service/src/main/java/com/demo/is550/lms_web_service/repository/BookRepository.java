@@ -156,16 +156,17 @@ public class BookRepository {
 
 	public Book save(Book book) /*throws BookExistsException*/ {
 
-        if (Objects.isNull(findBook(book.getTitle()))) {
+        /*if (Objects.isNull(findBookByName(book.getTitle()))) {
             books.add(book);
-            return findBook(book.getTitle());
-        }
+            return findBookByName(book.getTitle());
+        }*/
         return null; //delete
         //throw new CurrencyExistsException("Currency cannot be added because it exists");
     }
 
 	 public Book findBookByName(String name) {
-        return books.stream().filter(c -> c.getTitle().equals(name)).findFirst().orElse(null);
+        return null;
+		//return books.stream().filter(c -> c.getTitle().equals(name)).findFirst().orElse(null);
     }
 
 
