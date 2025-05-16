@@ -9,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import com.demo.is550.lms_web_service.exception.StudentNotFoundException;
 import com.demo.is550.lms_web_service.generatedSources.*;
 import com.demo.is550.lms_web_service.repository.*;
 
@@ -29,13 +31,17 @@ public class StudentEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetStudentRequest")
 	@ResponsePayload
-	public JAXBElement <GetStudentResponseType>  getStudent(@RequestPayload JAXBElement <GetStudentRequestType> request) {
+	public JAXBElement <GetStudentResponseType>  getStudent(@RequestPayload JAXBElement <GetStudentRequestType> request) throws StudentNotFoundException{
 		
 		GetStudentRequestType requestType = request.getValue();
 		GetStudentResponseType response = new GetStudentResponseType();
-		response.setStudent(studentRepository.findStudent(requestType.getStudentId()));
-		System.out.println("Response: " + response);
 
+		try {
+			response.setStudent(studentRepository.findStudentWithFault(requestType.getStudentId()));
+		} catch (Exception e) {
+			System.err.println("Exception caught: " + e.getMessage()); // Print to console
+			throw e;
+		}
         return createResponseJaxbElement(response, GetStudentResponseType.class);
 	}
 

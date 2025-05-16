@@ -26,9 +26,19 @@ public class BookEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetAllBooksRequest")
     @ResponsePayload
-    public JAXBElement<GetAllBooksResponseType> getAllBooks(@RequestPayload JAXBElement<GetAllBooksRequestType> request) {
+    public JAXBElement<GetAllBooksResponseType> getAllBooks(@RequestPayload JAXBElement<GetAllBooksRequestType> request) throws Exception {
 
         GetAllBooksResponseType response = new GetAllBooksResponseType();
+        response.getBook().addAll(bookRepository.findAll());
+        return createResponseJaxbElement(response, GetAllBooksResponseType.class);
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SaveBookRequest")
+    @ResponsePayload
+    public JAXBElement <GetAllBooksResponseType> saveNewBook(@RequestPayload JAXBElement  <SaveBookRequestType> request) throws Exception{
+        GetAllBooksResponseType response = new GetAllBooksResponseType();
+        SaveBookRequestType requestBook = (SaveBookRequestType) request.getValue();
+        bookRepository.save(requestBook.getNewBook());
         response.getBook().addAll(bookRepository.findAll());
         return createResponseJaxbElement(response, GetAllBooksResponseType.class);
     }

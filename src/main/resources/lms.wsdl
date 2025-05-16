@@ -16,20 +16,34 @@
     <wsdl:message name="GetStudentResponse">
         <wsdl:part name="parameters" element="tns:GetStudentResponse"/>
     </wsdl:message>
+    <wsdl:message name="GetStudentResponseFault">
+        <wsdl:part name="parameters" element="tns:StudentFault"/>
+    </wsdl:message>
     <wsdl:message name="GetAllBooksRequest">
         <wsdl:part name="parameters" element="tns:GetAllBooksRequest"/>
     </wsdl:message>
     <wsdl:message name="GetAllBooksResponse">
         <wsdl:part name="parameters" element="tns:GetAllBooksResponse"/>
     </wsdl:message>
+    <wsdl:message name="SaveBookRequest">
+        <wsdl:part name="parameters" element="tns:SaveBookRequest"/>
+    </wsdl:message>
+    <wsdl:message name="SaveBookResponse">
+        <wsdl:part name="parameters" element="tns:SaveBookResponse"/>
+    </wsdl:message>
 
     <wsdl:portType name="lmsPortType">
         <wsdl:operation name="GetStudentWithId">
             <wsdl:input message="tns:GetStudentRequest"/>
             <wsdl:output message="tns:GetStudentResponse"/>
+            <wsdl:fault name="StudentFault" message="tns:GetStudentResponseFault"/>
         </wsdl:operation>
         <wsdl:operation name="GetAllBooks">
             <wsdl:input message="tns:GetAllBooksRequest"/>
+            <wsdl:output message="tns:GetAllBooksResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="SaveNewBook">
+            <wsdl:input message="tns:SaveBookRequest"/>
             <wsdl:output message="tns:GetAllBooksResponse"/>
         </wsdl:operation>
     </wsdl:portType>
@@ -44,9 +58,21 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="StudentFault">
+                <soap:fault name="StudentFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="GetAllBooks">
             <soap:operation soapAction="http://lms.com/GetAllBooks"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SaveNewBook">
+            <soap:operation soapAction="http://is550.soap.com/SaveNewBook"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
