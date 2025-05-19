@@ -1,4 +1,4 @@
-package com.demo.is550.soap_web_service_consumer;
+package com.demo.is550.soap_web_service_consumer.soap;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,8 @@ public class BookConfiguration {
     }
 
     @Bean
-    public BookClient bookClient(Jaxb2Marshaller marshaller) {
-        BookClient client = new BookClient();
+    public SoapClient bookClient(Jaxb2Marshaller marshaller) {
+        SoapClient client = new SoapClient();
         client.setDefaultUri("http://localhost:8080/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
