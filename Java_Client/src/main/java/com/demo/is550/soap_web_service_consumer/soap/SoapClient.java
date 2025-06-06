@@ -27,7 +27,7 @@ public class SoapClient  extends WebServiceGatewaySupport{
 		try {
 			GetAllBooksResponseType response = getBooks();
 			response.getBook().stream().forEach(f ->
-				System.err.println("[SOAP]" + f.getId() + ","+ f.getTitle()));
+				System.err.println("[SOAP] " + f.getId() + ","+ f.getTitle()));
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.demo.is550.soap_web_service_consumer.model.Review;
 import com.demo.is550.soap_web_service_consumer.model.Student;
 
 @Component
@@ -21,5 +22,18 @@ public class RestClient {
 		
 		Student[] students = restTemplate.getForObject(baseUrl, Student[].class);
 		Arrays.stream(students).forEach(s -> System.out.println("[REST] " + s.getName()));
+	}
+	
+	public void testRestToGRPCClient() {
+		Long studentID = 1L;
+		String url = baseUrl + "/" + studentID;
+		Student student = restTemplate.getForObject(url, Student.class);
+		System.out.println("[REST -> GRPC] " + "For review test, student: " + student.getName() 
+										   + " " +  student.getSurname());
+		
+		url += "/reviews";
+		Review[] reviews = restTemplate.getForObject(url, Review[].class);
+		Arrays.stream(reviews).forEach(r -> System.out.println("[REST -> GRPC] " + r.getReviewText()));
+		
 	}
 }

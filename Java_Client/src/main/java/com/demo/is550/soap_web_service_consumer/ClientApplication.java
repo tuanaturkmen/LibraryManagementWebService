@@ -28,6 +28,7 @@ public class ClientApplication implements CommandLineRunner{
 	public void run(String... args) {
 		soapClient.testSoapClient();
 		restClient.testRestClient();
+		restClient.testRestToGRPCClient();
 	}
 
 }
