@@ -18,9 +18,11 @@ public class StudentService {
 	
 	@PostConstruct
 	public void initStudentList() {
-        addStudent(new Student(null, "Ali",    "A", "Computer Science", 1));
-        addStudent(new Student(null, "Ayşe",   "B", "Mathematics",      1));
-        addStudent(new Student(null, "Mehmet", "C", "Physics",          2));
+		addStudent(new Student(null, "Ali",    "Yılmaz",  "Computer Science", 1));
+		addStudent(new Student(null, "Ayşe",   "Demir",   "Mathematics",      1));
+		addStudent(new Student(null, "Mehmet", "Koç",     "Physics",          2));
+		addStudent(new Student(null, "Zeynep", "Çelik",   "Literature",       3));
+		addStudent(new Student(null, "Can",    "Arslan",  "History",          4));
 	}
 	
 	public Student addStudent(Student student) {

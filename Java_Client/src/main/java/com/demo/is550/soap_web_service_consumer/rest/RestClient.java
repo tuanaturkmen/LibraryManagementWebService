@@ -2,6 +2,7 @@ package com.demo.is550.soap_web_service_consumer.rest;
 
 import java.util.Arrays;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,6 +14,34 @@ public class RestClient {
 
 	private final RestTemplate restTemplate = new RestTemplate();
 	private final String baseUrl = "http://localhost:8082/api/students";
+	
+	public Student[] getStudents() {
+		Student[] students = restTemplate.getForObject(baseUrl, Student[].class);
+		return students;
+	}
+	
+	public String deleteStudent(int id) {
+	    String url = baseUrl + "/" + id;
+	    return restTemplate.exchange(url, HttpMethod.DELETE, null, String.class).getBody();
+	}
+	
+	public Student addStudent(Student student) {
+		Student createdStudent = restTemplate.postForObject(baseUrl, student, Student.class);
+		return createdStudent;
+	}
+	
+	public Student updateStudent(Student updatedStudent) {
+		Long studentId = updatedStudent.getId();
+	    String url = baseUrl + "/" + studentId;
+	    restTemplate.put(url, updatedStudent);
+	    return updatedStudent;
+	}
+	
+	public Review[] getReviewByStudentId(int id) {
+		String url = baseUrl + "/" + id + "/reviews";
+		Review[] reviews = restTemplate.getForObject(url, Review[].class);		
+		return reviews;
+	}
 	
 	public void testRestClient() {
 		Student student = new Student(null, "Test Name", "Test Surname", "Test Dep.", 1);

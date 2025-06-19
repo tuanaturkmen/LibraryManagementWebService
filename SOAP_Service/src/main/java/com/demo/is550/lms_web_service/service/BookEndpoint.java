@@ -1,7 +1,5 @@
 package com.demo.is550.lms_web_service.service;
 
-import javax.xml.namespace.QName;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -24,17 +22,16 @@ public class BookEndpoint {
 		this.bookRepository = bookRepository;
 	}
 
-    @SuppressWarnings("unchecked")
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetAllBooksRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetAllBooksRequest")
     @ResponsePayload
     public JAXBElement<GetAllBooksResponseType> getAllBooks(@RequestPayload JAXBElement<GetAllBooksRequestType> request) {
 
         GetAllBooksResponseType response = new GetAllBooksResponseType();
         response.getBook().addAll(bookRepository.findAll());
-        return createResponseJaxbElement(response, GetAllBooksResponseType.class);
+
+        return new ObjectFactory().createGetAllBooksResponse(response);
     }
     
-	@SuppressWarnings("unchecked")
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetBookByIdRequest")
 	@ResponsePayload
 	public JAXBElement <GetBookByIdResponseType> getBookById(@RequestPayload JAXBElement <GetBookByIdRequestType> request) {
@@ -43,10 +40,9 @@ public class BookEndpoint {
 		GetBookByIdResponseType response = new GetBookByIdResponseType();
 		response.setBook(bookRepository.findBookById(requestType.getId()));
 
-        return createResponseJaxbElement(response, GetBookByIdResponseType.class);
+        return new ObjectFactory().createGetBookByIdResponse(response);     
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteBookByIdRequest")
 	@ResponsePayload
 	public JAXBElement <DeleteBookByIdResponseType> deleteBookById(@RequestPayload JAXBElement <DeleteBookByIdRequestType> request) {
@@ -55,25 +51,24 @@ public class BookEndpoint {
 		DeleteBookByIdResponseType response = new DeleteBookByIdResponseType();
 		boolean result = bookRepository.deleteBookById(requestType.getId());
 		response.setSuccess(result);
-
-        return createResponseJaxbElement(response, DeleteBookByIdResponseType.class);
+		
+		return new ObjectFactory().createDeleteBookByIdResponse(response); 
 	}
-	
-	@SuppressWarnings("unchecked")
+		
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "AddBookRequest")
 	@ResponsePayload
-	public JAXBElement <AddBookResponseType> addBook(@RequestPayload JAXBElement <AddBookRequestType> request) {
-		
-		AddBookRequestType requestType = request.getValue();
-		AddBookResponseType response = new AddBookResponseType();
-		int bookId = bookRepository.addNewBook(requestType.getBook());
-		response.setSuccess(true);
-		response.setBookId(bookId);
+	public JAXBElement<AddBookResponseType> addBook(@RequestPayload JAXBElement<AddBookRequestType> request) {
+	    
+	    AddBookRequestType requestType = request.getValue();
+	    AddBookResponseType response = new AddBookResponseType();
 
-        return createResponseJaxbElement(response, AddBookResponseType.class);
+	    int bookId = bookRepository.addNewBook(requestType.getBook());
+	    response.setSuccess(true);
+	    response.setBookId(bookId);
+
+	    return new ObjectFactory().createAddBookResponse(response);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "UpdateBookRequest")
 	@ResponsePayload
 	public JAXBElement <UpdateBookResponseType> updateBook(@RequestPayload JAXBElement <UpdateBookRequestType> request) {
@@ -82,15 +77,9 @@ public class BookEndpoint {
 		UpdateBookResponseType response = new UpdateBookResponseType();
 		boolean result = bookRepository.updateBook(requestType.getBook());
 		response.setSuccess(result);
-
-        return createResponseJaxbElement(response, UpdateBookResponseType.class);
+		
+		return new ObjectFactory().createUpdateBookResponse(response);
+		
 	}
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	private <T> JAXBElement createResponseJaxbElement(T object, Class clazz) {
-
-        return new JAXBElement<>(new QName(NAMESPACE_URI, clazz.getSimpleName()), clazz, object);
-
-    }
 
 }

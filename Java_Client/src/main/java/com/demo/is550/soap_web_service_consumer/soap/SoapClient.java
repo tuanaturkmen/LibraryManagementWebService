@@ -1,37 +1,68 @@
 package com.demo.is550.soap_web_service_consumer.soap;
 
 import com.demo.is550.soap_web_service_consumer.client.gen.*;
+
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 import jakarta.xml.bind.*;
 
-public class SoapClient  extends WebServiceGatewaySupport{
+public class SoapClient extends WebServiceGatewaySupport{
 
+	
+	@SuppressWarnings("unchecked")
 	public GetAllBooksResponseType getBooks() throws JAXBException {
-		
-        ObjectFactory objectFactory = new ObjectFactory();
+	    
+		ObjectFactory objectFactory = new ObjectFactory();
+	    GetAllBooksRequestType requestType = objectFactory.createGetAllBooksRequestType();
+	    
+	    JAXBElement<GetAllBooksRequestType> request   = objectFactory.createGetAllBooksRequest(requestType);
+	    JAXBElement<GetAllBooksResponseType> response = (JAXBElement<GetAllBooksResponseType>)
+	        getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws", request);
 
-        GetAllBooksRequestType request = objectFactory.createGetAllBooksRequestType();
-
-        JAXBElement<GetAllBooksRequestType> jaxbRequest = objectFactory.createGetAllBooksRequest(request);
-
-        JAXBElement<GetAllBooksResponseType> jaxbResponse =
-            (JAXBElement<GetAllBooksResponseType>) getWebServiceTemplate()
-                .marshalSendAndReceive("http://localhost:8080/ws", jaxbRequest);
-
-        return jaxbResponse.getValue();
-		
+	    return response.getValue();
 	}
 	
-	public void testSoapClient() {
-		try {
-			GetAllBooksResponseType response = getBooks();
-			response.getBook().stream().forEach(f ->
-				System.err.println("[SOAP] " + f.getId() + ","+ f.getTitle()));
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	@SuppressWarnings("unchecked")
+	public AddBookResponseType addBook(Book book) throws JAXBException {
+		
+	    ObjectFactory objectFactory = new ObjectFactory();
+	    AddBookRequestType requestType = objectFactory.createAddBookRequestType();
+	    requestType.setBook(book);
+	    
+	    JAXBElement<AddBookRequestType> request   = objectFactory.createAddBookRequest(requestType);
+	    JAXBElement<AddBookResponseType> response = (JAXBElement<AddBookResponseType>)
+		        getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws", request);
+	    
+		return response.getValue();
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public DeleteBookByIdResponseType deleteBook(int id) throws JAXBException {
+		
+	    ObjectFactory objectFactory = new ObjectFactory();
+	    DeleteBookByIdRequestType requestType = objectFactory.createDeleteBookByIdRequestType();
+	    requestType.setId(id);
+	    
+	    JAXBElement<DeleteBookByIdRequestType> request   = objectFactory.createDeleteBookByIdRequest(requestType);
+	    JAXBElement<DeleteBookByIdResponseType> response = (JAXBElement<DeleteBookByIdResponseType>)
+		        getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws", request);
+	    
+		return response.getValue();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public UpdateBookResponseType updateBook(Book updatedBook) {
+		
+	    ObjectFactory objectFactory = new ObjectFactory();
+	    UpdateBookRequestType requestType = objectFactory.createUpdateBookRequestType();
+	    requestType.setBook(updatedBook);
+	    
+	    JAXBElement<UpdateBookRequestType> request   = objectFactory.createUpdateBookRequest(requestType);
+	    JAXBElement<UpdateBookResponseType> response = (JAXBElement<UpdateBookResponseType>)
+		        getWebServiceTemplate().marshalSendAndReceive("http://localhost:8080/ws", request);
+	    
+		return response.getValue();
+	}
 }
