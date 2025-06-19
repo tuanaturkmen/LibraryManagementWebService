@@ -32,6 +32,7 @@ public class BookController {
 
 	@GetMapping()
 	public GetAllBooksResponseType getAllBooks() {
+		System.out.println("[REST] getAllBooks request is received.");
 		try {
 			return soapClient.getBooks();
 		} catch (JAXBException e) {
@@ -43,6 +44,7 @@ public class BookController {
 	
 	@PostMapping
 	public AddBookResponseType addBook(@RequestBody Book book) {
+		System.out.println("[REST] addBook request is received.");
 		try {
 			return soapClient.addBook(book);
 		} catch (JAXBException e) {
@@ -54,6 +56,7 @@ public class BookController {
 	
 	@DeleteMapping("/{id}")
 	public DeleteBookByIdResponseType deleteBook(@PathVariable int id) {
+		System.out.println("[REST] deleteBook request is received.");
 		try {
 			return soapClient.deleteBook(id);
 		} catch (JAXBException e) {
@@ -65,6 +68,7 @@ public class BookController {
 	
 	@PutMapping()
 	public UpdateBookResponseType updateBook(@RequestBody Book updatedBook) {
+		System.out.println("[REST] updateBook request is received.");
 		return soapClient.updateBook(updatedBook);
 	}
 	

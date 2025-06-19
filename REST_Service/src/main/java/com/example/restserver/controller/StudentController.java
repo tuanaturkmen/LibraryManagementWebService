@@ -33,16 +33,20 @@ public class StudentController {
 	
 	@GetMapping
 	public Collection<Student> getAllStudents() {
+		System.out.println("[REST] getAllStudents request is received.");
 		return studentService.getAllStudents();
 	}
 	
 	@GetMapping("/{id}")
 	public Student getStudentByID(@PathVariable Long id) {
+		System.out.println("[REST] getStudentByID request is received.");
 		return studentService.getStudentByID(id);
 	}
 	
 	@GetMapping("/{id}/reviews")
 	public Collection<Review> getReviewsOfStudent(@PathVariable Long id) {
+		System.out.println("[REST] getReviewsOfStudent request is received.");
+		System.out.println("[GRPC] getReviewsOfStudent request is send.");
 		ReviewProto.GetReviewsRequest request = ReviewProto.GetReviewsRequest.newBuilder()
 				.setStudentId(id)
 				.build();
@@ -63,18 +67,37 @@ public class StudentController {
 	
 	@PostMapping
 	public Student addStudent(@RequestBody Student student) {
+		System.out.println("[REST] addStudent request is received.");
 		return studentService.addStudent(student);
 	}
 	
 	@PutMapping("/{id}")
 	public Student updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent) {
+		System.out.println("[REST] updateStudent request is received.");
 		return studentService.updateStudent(id, updatedStudent);
 	}
 	
 	@DeleteMapping("/{id}")
 	public String deleteStudent(@PathVariable Long id) {
+		System.out.println("[REST] deleteStudent request is received.");
 		boolean isDeleted = studentService.deleteStudent(id);
 		return isDeleted ? "Deleted" : "Student does not exists";
+	}
+	
+	@DeleteMapping("/{studentId}/reviews/{reviewId}")
+	public String deleteReviewOfStudent(@PathVariable Long studentId, @PathVariable Long reviewId) {
+	    System.out.println("[REST] deleteReviewOfStudent request is received.");
+	    System.out.println("[GRPC] deleteReviewOfStudent request is sent.");
+
+	    ReviewProto.DeleteReviewRequest grpcRequest = ReviewProto.DeleteReviewRequest.newBuilder()
+	            .setReviewId(reviewId)
+	            .build();
+
+	    ReviewProto.DeleteReviewResponse grpcResponse = reviewStub.deleteReview(grpcRequest);
+	    
+	    System.err.println(grpcResponse);
+	    
+	    return grpcResponse.getMessage();
 	}
 	
 }

@@ -25,28 +25,39 @@ public class StudentController {
 	}
 	
 	@GetMapping()
-	public Student[] getAllBooks() {
+	public Student[] getAllStudents() {
+		System.out.println("[REST] getAllStudents request is received.");
 		return restClient.getStudents();
 	}
 	
 	@DeleteMapping("/{id}")
 	public String deleteStudent(@PathVariable int id) {
+		System.out.println("[REST] deleteStudent request is received.");
 		return restClient.deleteStudent(id);
 	}
 	
 	@PostMapping
 	public Student addStudent(@RequestBody Student student) {
+		System.out.println("[REST] addStudent request is received.");
 		return restClient.addStudent(student);
 	}
 	
 	@PutMapping()
 	public Student updateStudent(@RequestBody Student updatedStudent) {
+		System.out.println("[REST] updateStudent request is received.");
 		return restClient.updateStudent(updatedStudent);
 	}
 	
 	@GetMapping("/{id}/reviews")
-	public Review[] getReviwesByStudentId(@PathVariable int id) {
+	public Review[] getReviewsByStudentId(@PathVariable int id) {
+		System.out.println("[REST] getReviewsByStudentId request is received.");
 		return restClient.getReviewByStudentId(id);
+	}
+	
+	@DeleteMapping("/{studentId}/reviews/{reviewId}")
+	public String deleteReviewByStudentId(@PathVariable int studentId, @PathVariable int reviewId) {
+		System.out.println("[REST] deleteReviewByStudentId request is received.");
+		return restClient.deleteReviewOfStudent(studentId, reviewId);
 	}
 	
 }

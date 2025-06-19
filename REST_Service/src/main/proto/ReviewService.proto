@@ -5,6 +5,7 @@ option java_outer_classname = "ReviewProto";
 
 service ReviewService {
   rpc GetReviewsByStudentID (GetReviewsRequest) returns (GetReviewsResponse);
+  rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
 }
 
 message GetReviewsRequest {
@@ -22,4 +23,13 @@ message ReviewData {
 
 message GetReviewsResponse {
   repeated ReviewData reviews = 1;
+}
+
+message DeleteReviewRequest {
+  int64 review_id = 1;
+}
+
+message DeleteReviewResponse {
+  bool success = 1;
+  string message = 2;
 }

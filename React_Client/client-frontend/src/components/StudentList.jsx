@@ -94,7 +94,6 @@ function StudentList() {
         axios.get(`http://localhost:8090/api/students/${selectedRow.id}/reviews`)
         .then((res) => {
             setReviews(res.data);
-            //setSelectedStudentName(student.name + " " + student.surname);
             setIsReviewDialogOpen(true);
         })
         .catch(console.error);
@@ -122,6 +121,25 @@ function StudentList() {
         }
 
         setIsAddDialogOpen(false);
+    }
+
+    const handleDeleteReview = (reviewId) => {
+        
+        if (reviewId === undefined || !selecteStudent?.id) {
+            return;
+        }
+
+        axios.delete(`http://localhost:8090/api/students/${selecteStudent.id}/reviews/${reviewId}`)
+            .then((res) => {
+                console.log("Response: ", res.data);
+                return axios.get(`http://localhost:8090/api/students/${selecteStudent.id}/reviews`);
+            })
+            .then((res) => {
+                setReviews(res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     return (
@@ -161,6 +179,7 @@ function StudentList() {
             />
             <ReviewDialog
                 open={isReviewDialogOpen}
+                onDelete={(reviewId) => handleDeleteReview(reviewId)}
                 onClose={() => setIsReviewDialogOpen(false)}
                 selectedStudent={selecteStudent}
                 reviews={reviews}

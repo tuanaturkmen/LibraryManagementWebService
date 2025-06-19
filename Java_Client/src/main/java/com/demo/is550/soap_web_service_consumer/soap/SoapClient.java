@@ -11,6 +11,7 @@ public class SoapClient extends WebServiceGatewaySupport{
 	
 	@SuppressWarnings("unchecked")
 	public GetAllBooksResponseType getBooks() throws JAXBException {
+		System.out.println("[SOAP] getBooks request is send.");
 	    
 		ObjectFactory objectFactory = new ObjectFactory();
 	    GetAllBooksRequestType requestType = objectFactory.createGetAllBooksRequestType();
@@ -25,6 +26,7 @@ public class SoapClient extends WebServiceGatewaySupport{
 	
 	@SuppressWarnings("unchecked")
 	public AddBookResponseType addBook(Book book) throws JAXBException {
+		System.out.println("[SOAP] addBook request is send.");
 		
 	    ObjectFactory objectFactory = new ObjectFactory();
 	    AddBookRequestType requestType = objectFactory.createAddBookRequestType();
@@ -40,6 +42,7 @@ public class SoapClient extends WebServiceGatewaySupport{
 	
 	@SuppressWarnings("unchecked")
 	public DeleteBookByIdResponseType deleteBook(int id) throws JAXBException {
+		System.out.println("[SOAP] deleteBook request is send.");
 		
 	    ObjectFactory objectFactory = new ObjectFactory();
 	    DeleteBookByIdRequestType requestType = objectFactory.createDeleteBookByIdRequestType();
@@ -54,6 +57,7 @@ public class SoapClient extends WebServiceGatewaySupport{
 	
 	@SuppressWarnings("unchecked")
 	public UpdateBookResponseType updateBook(Book updatedBook) {
+		System.out.println("[SOAP] updateBook request is send.");
 		
 	    ObjectFactory objectFactory = new ObjectFactory();
 	    UpdateBookRequestType requestType = objectFactory.createUpdateBookRequestType();

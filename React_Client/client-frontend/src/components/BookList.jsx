@@ -35,6 +35,8 @@ function BookList() {
         axios.get("http://localhost:8090/api/books")
         .then((res) => {
             const bookList = Array.isArray(res.data.book) ? res.data.book : [];
+
+            console.log(bookList)
             setBooks(bookList);
         })
         .catch((err) => {
